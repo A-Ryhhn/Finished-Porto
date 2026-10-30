@@ -867,10 +867,11 @@ footer {
   }
 
   .badge {
-  zoom: .48;
-  transform: rotate(0deg);
-  transform-origin: center center;
+  zoom: .25;
+  transform: scale(0.5) rotate(5deg);
+  }
 }
+  
   .page {
     padding: 120px 7% 70px;
   }
