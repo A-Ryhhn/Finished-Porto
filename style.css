@@ -835,22 +835,22 @@ footer {
     padding: 11px 16px;
   }
 
-  .hero {
-    padding: 115px 7% 50px;
-    display: flex;
-    flex-direction: column;
-  }
+.hero {
+  padding:115px 7% 50px;
+  display:flex;
+  flex-direction:column;
+}
 
-  .hero-right {
-    order: 1;
-    height: 430px;
-    width: 100%;
-    overflow: visible;
-  }
+.hero-right {
+  order:1;
+  height:430px;
+  width:100%;
+  overflow:visible;
+}
 
-  .hero-left {
-    order: 2;
-  }
+.hero-left {
+  order:2;
+}
 
   .hero h1 {
     font-size: 68px;
@@ -867,10 +867,10 @@ footer {
   }
 
   .badge {
-    transform: scale(0.48) rotate(3deg);
-    transform-origin: center center;
-  }
-
+  zoom: .48;
+  transform: rotate(0deg);
+  transform-origin: center center;
+}
   .page {
     padding: 120px 7% 70px;
   }
