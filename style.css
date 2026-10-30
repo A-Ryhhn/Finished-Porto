@@ -808,7 +808,8 @@ footer {
   }
 
   .badge {
-    transform: scale(0.9) rotate(3deg);
+  transform: scale(0.48) rotate(0deg);
+  transform-origin: 50% 0%;
   }
 
   .about-grid {
@@ -868,9 +869,9 @@ footer {
 
   .badge {
   zoom: .25;
-  transform: scale(0.5) rotate(5deg);
+  transform: scale(0.48) rotate(0deg);
+  transform-origin: 50% 0%;
   }
-}
   
   .page {
     padding: 120px 7% 70px;
@@ -926,5 +927,29 @@ footer {
   footer {
     flex-wrap: wrap;
     gap: 15px;
+  }
+}
+
+/* ===== NATURAL ID CARD MOVEMENT ===== */
+
+.badge {
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+.lanyard {
+  transform-origin: center top;
+  will-change: transform;
+}
+
+.id-card {
+  transform-origin: 50% 0%;
+  will-change: transform;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .badge {
+    transform: scale(.48) rotate(0deg);
   }
 }
