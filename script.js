@@ -16,6 +16,7 @@ idCard.addEventListener("pointerdown", (e) => {
 
     dragging = true;
 
+    // Hitung posisi awal berdasarkan posisi pointer dikurangi offset x/y saat ini
     startX = e.clientX - x;
     startY = e.clientY - y;
 
@@ -28,13 +29,16 @@ idCard.addEventListener("pointermove", (e) => {
 
     e.preventDefault();
 
+    // Batasi pergerakan (clamp)
     targetX = Math.max(-120, Math.min(120, e.clientX - startX));
     targetY = Math.max(-80, Math.min(80, e.clientY - startY));
 
     x = targetX;
     y = targetY;
 
+    // Ubah target rotasi berdasarkan posisi geser x
     targetRotation = 3 + x * 0.06;
+    rotation = targetRotation; // Langsung set agar responsif saat digeser
 
     updateCard();
 });
@@ -44,48 +48,48 @@ function updateCard() {
 
     badge.style.transform =
         `translate3d(${x}px, ${y}px, 0) scale(${scale}) rotate(${rotation}deg)`;
-
-    rotation += (targetRotation - rotation) * 0.15;
 }
 
-function releaseCard() {
+function releaseCard(e) {
     if (!dragging) return;
 
     dragging = false;
 
+    // Set target kembali ke posisi awal (x=0, y=0, rotasi=3)
     targetX = 0;
     targetY = 0;
     targetRotation = 3;
 
     idCard.style.cursor = "grab";
 
-    returnHome();
+    try {
+        idCard.releasePointerCapture(e.pointerId);
+    } catch (err) {}
+
+    requestAnimationFrame(returnHome);
 }
 
 function returnHome() {
     if (dragging) return;
 
+    // Animasi pelan-pelan mendekati target (0,0)
     x += (targetX - x) * 0.12;
     y += (targetY - y) * 0.12;
     rotation += (targetRotation - rotation) * 0.12;
 
     updateCard();
 
-    if (Math.abs(x) > 0.2 || Math.abs(y) > 0.2 ||
-        Math.abs(rotation - 3) > 0.1) {
+    // Lanjutkan animasi selama belum benar-benar kembali ke titik awal
+    if (Math.abs(x - targetX) > 0.2 || Math.abs(y - targetY) > 0.2 ||
+        Math.abs(rotation - targetRotation) > 0.1) {
         requestAnimationFrame(returnHome);
     } else {
-        x = 0;
-        y = 0;
-        rotation = 3;
+        x = targetX;
+        y = targetY;
+        rotation = targetRotation;
         updateCard();
     }
 }
 
 idCard.addEventListener("pointerup", releaseCard);
 idCard.addEventListener("pointercancel", releaseCard);
-console.log("SCRIPT BERHASIL DIMUAT");
-
-badge.addEventListener("click", () => {
-    console.log("KARTU DIKLIK");
-});
