@@ -54,17 +54,7 @@ function animate() {
          scale(${scale})
          rotate(${rotation + baseRotation}deg)`;
 
-    if (lanyard) {
-        const ropeRotation = Math.max(
-            -14,
-            Math.min(14, x * 0.18)
-        );
-
-        lanyard.style.transform =
-            `rotate(${ropeRotation}deg)`;
-    }
-
-    if (idCard) {
+       if (idCard) {
         const cardRotation = Math.max(
             -10,
             Math.min(
