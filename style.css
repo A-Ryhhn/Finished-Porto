@@ -246,28 +246,26 @@ body:before {
 }
 
 .badge {
-  width: 650px;
-  height: 545px;
+  width: 640px;
+  height: 390px;
   position: relative;
-  transform: rotate(3deg);
   transform-style: preserve-3d;
   cursor: grab;
   touch-action: none;
-  transition: transform 0.45s ease;
+  user-select: none;
   z-index: 4;
+  will-change: transform;
 }
 
 .badge.dragging {
   cursor: grabbing;
-  transition: none;
 }
 
 .id-card {
   position: absolute;
   left: 0;
-  top: 112px;
-  width: 640px;
-  height: 390px;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
   border: 1px solid #d8b9b4aa;
 
@@ -282,7 +280,7 @@ body:before {
     0 35px 70px #000a,
     inset 0 0 35px #fff00008;
 
-  overflow: visible;
+  overflow: hidden;
 }
 
 .id-card:before {
@@ -738,137 +736,47 @@ footer {
 ========================= */
 
 @media (max-width: 1000px) {
-  .header nav {
-    gap: 20px;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
   .hero-right {
-    height: 590px;
+    min-height: 500px;
   }
 
   .badge {
-  transform: scale(0.48) rotate(0deg);
-  transform-origin: 50% 0%;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .top {
-    gap: 50px;
+    transform-origin: center center;
   }
 }
 
 @media (max-width: 700px) {
-
-  .header {
-    height: 85px;
-    padding: 25px 6%;
-  }
-
-  .header nav {
-    display: none;
-  }
-
-  .talk {
-    padding: 11px 16px;
-  }
-
-.hero {
-  padding:115px 7% 50px;
-  display:flex;
-  flex-direction:column;
-}
-
-.hero-right {
-  order:1;
-  height:430px;
-  width:100%;
-  overflow:visible;
-}
-
-.hero-left {
-  order:2;
-}
-
-  .hero h1 {
-    font-size: 68px;
-    letter-spacing: -4px;
-  }
-
-  .intro br {
-    display: none;
-  }
-
-  .actions {
+  .hero {
+    display: flex;
     flex-direction: column;
+  }
+
+  .hero-right {
+    order: 1;
+    width: 100%;
+    height: 310px;
+    min-height: 310px;
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
   }
 
+  .hero-left {
+    order: 2;
+  }
+
   .badge {
-  zoom: .25;
-  transform: scale(0.48) rotate(0deg);
-  transform-origin: 50% 0%;
-  }
-  
-  .page {
-    padding: 120px 7% 70px;
+    width: 320px;
+    height: 195px;
+    transform-origin: center center;
   }
 
-  .heading h2 {
-    font-size: 57px;
+  .id-card {
+    border-radius: 12px;
   }
 
-  .top {
-    display: block;
-  }
-
-  .top > p {
-    margin-top: 35px;
-  }
-
-  .achievement-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .achievement-grid article {
-    border-right: 0 !important;
-  }
-
-  .education {
-    grid-template-columns: 1fr;
-    padding: 25px;
-    gap: 20px;
-  }
-
-  .projects a {
-    grid-template-columns: 65px 1fr 35px;
-    gap: 10px;
-  }
-
-  .projects a > span {
-    display: none;
-  }
-
-  .projects h3 {
-    font-size: 25px;
-  }
-
-  .contact h2 {
-    font-size: 65px;
-  }
-
-  .contact-links {
-    width: 100%;
-  }
-
-  footer {
-    flex-wrap: wrap;
-    gap: 15px;
+  .drag-label {
+    right: 0;
+    top: -25px;
   }
 }
