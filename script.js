@@ -84,3 +84,8 @@ function returnHome() {
 
 idCard.addEventListener("pointerup", releaseCard);
 idCard.addEventListener("pointercancel", releaseCard);
+console.log("SCRIPT BERHASIL DIMUAT");
+
+badge.addEventListener("click", () => {
+    console.log("KARTU DIKLIK");
+});
