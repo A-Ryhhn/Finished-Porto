@@ -1,25 +1,23 @@
 const badge = document.getElementById("badge");
-const idCard = document.querySelector(".id-card");
 
 let drag = false;
 let startX = 0;
 let startY = 0;
+
 let x = 0;
 let y = 0;
 let targetX = 0;
 let targetY = 0;
+
 let rotation = 3;
 let targetRotation = 3;
 
-const spring = 0.10;
-const damping = 0.78;
-
 function animate() {
-    if (!drag) {
-        x += (targetX - x) * spring;
-        y += (targetY - y) * spring;
-        rotation += (targetRotation - rotation) * 0.12;
-    }
+    // Posisi tetap diperbarui saat kartu ditarik
+    x += (targetX - x) * (drag ? 0.45 : 0.10);
+    y += (targetY - y) * (drag ? 0.45 : 0.10);
+
+    rotation += (targetRotation - rotation) * 0.12;
 
     const isMobile = window.innerWidth <= 700;
     const scale = isMobile ? 0.48 : 1;
@@ -36,9 +34,6 @@ badge.addEventListener("pointerdown", (e) => {
     startX = e.clientX - x;
     startY = e.clientY - y;
 
-    targetX = x;
-    targetY = y;
-
     badge.classList.add("dragging");
     badge.setPointerCapture(e.pointerId);
 });
@@ -46,8 +41,8 @@ badge.addEventListener("pointerdown", (e) => {
 badge.addEventListener("pointermove", (e) => {
     if (!drag) return;
 
-    targetX = Math.max(-100, Math.min(100, e.clientX - startX));
-    targetY = Math.max(-60, Math.min(60, e.clientY - startY));
+    targetX = Math.max(-120, Math.min(120, e.clientX - startX));
+    targetY = Math.max(-80, Math.min(80, e.clientY - startY));
 
     targetRotation = 3 + targetX * 0.06;
 });
@@ -56,6 +51,7 @@ function stopDrag() {
     if (!drag) return;
 
     drag = false;
+
     badge.classList.remove("dragging");
 
     targetX = 0;
@@ -68,7 +64,7 @@ badge.addEventListener("pointercancel", stopDrag);
 
 animate();
 
-// Navigation active state
+// Navigation
 const links = [...document.querySelectorAll(".header nav a")];
 const sections = [...document.querySelectorAll("section[id]")];
 
